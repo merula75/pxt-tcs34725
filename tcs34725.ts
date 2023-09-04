@@ -163,7 +163,9 @@ namespace TCS34725 {
     }
 
     export function reset() {
-        pins.i2cWriteBuffer(TCS34725_I2C_ADDR, ( TCS34725_REGISTER_COMMAND | TCS34725_REGISTER_RESET) & 0xFF);
+        let _registerBuffer = pins.createBuffer(1);
+        _registerBuffer[0] = TCS34725_REGISTER_COMMAND | TCS34725_REGISTER_RESET;
+        pins.i2cWriteBuffer(TCS34725_I2C_ADDR, _registerBuffer);
     }
     
     export function turnSensorOn(atime: TCS34725_ATIME) {
